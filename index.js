@@ -5,7 +5,6 @@ const passport = require('passport');
 
 const keys = require('./config/keys');
 
-const authRoutes = require('./routes/authRoutes');
 require('./models/User');
 require('./services/passport');
 
@@ -23,7 +22,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-authRoutes(app);
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 // or require('./routes/authRoutes')(app) to bring in the routes for the app.
 
 // dynamic port bindig for heroku
