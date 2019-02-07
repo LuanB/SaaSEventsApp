@@ -1,6 +1,6 @@
 #keys
+node_modules
 dev.js
-.env*
 
 # Logs
 logs
