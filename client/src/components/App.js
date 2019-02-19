@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import '../styles/dashboard.css';
+import '../styles/layout.css';
+import { Footerlanding } from './Footer';
 
 class App extends Component {
   componentDidMount() {
@@ -15,22 +19,34 @@ class App extends Component {
   }
 
   render() {
+    //console.log(this.LoggedIn);
+    let LoggedIn = Boolean(this.props.auth);
+    //let LoggedIn = true;
+
     return (
-      <div className="container">
-        <BrowserRouter>
-          <div>
-            <Header />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+      <main className={LoggedIn ? 'loggedIn' : 'layout'}>
+        <Fragment>
+          <div className="container">
+            <BrowserRouter>
+              <div>
+                <Header />
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/surveys" component={Dashboard} />
+                <Route path="/surveys/new" component={SurveyNew} />
+              </div>
+            </BrowserRouter>
           </div>
-        </BrowserRouter>
-      </div>
+          <Footerlanding />
+        </Fragment>
+      </main>
     );
   }
 }
 
-export default connect(
-  null,
-  actions
-)(App);
+//export default connect(null, actions)(App);
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps, actions)(App);
