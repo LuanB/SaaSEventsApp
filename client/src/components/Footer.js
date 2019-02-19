@@ -56,7 +56,10 @@ export const Footerlanding = (props) => {
         <div class="footer-copyright">
           <div class="container">
             © 2019 Copyright Luan
-            <a class="grey-text text-lighten-4 right" href="#!">
+            <a
+              class="grey-text text-lighten-4 right"
+              href="https://github.com/LuanB/SaaSEventsApp"
+            >
               Github code here
             </a>
           </div>
